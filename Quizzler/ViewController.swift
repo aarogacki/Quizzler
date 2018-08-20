@@ -39,12 +39,16 @@ class ViewController: UIViewController {
     }
     
     func updateUI() {
-      
+        scoreLabel.text = "Score: \(score)"
+        progressLabel.text = "\(questionNumber + 1) / 13"
+        progressBar.frame.size.width = (view.frame.size.width / 13) * CGFloat(questionNumber + 1)
     }
     
     func nextQuestion() {
         if questionNumber <= 12 {
             questionLabel.text = allQuestions.list[questionNumber].questionText
+            
+            updateUI()
         } else {
             let alert = UIAlertController(title: "Awesome!", message: "You're fininshed. Anotha round?", preferredStyle: .alert)
             
@@ -68,6 +72,7 @@ class ViewController: UIViewController {
     }
     
     func startOver() {
+        score = 0
         questionNumber = 0
         nextQuestion()
     }
